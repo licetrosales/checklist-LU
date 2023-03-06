@@ -4,7 +4,9 @@ const app = express();
 
 
 app.get('/', (req, res, next) => {
-    res.send("Hello World");
+    res.json({
+        message: 'Welcome to the API',
+    });
 });
 //No route found handler
 app.use((req, res, next) => {
@@ -12,6 +14,15 @@ app.use((req, res, next) => {
     res.json({
         message: 'Error. Route not found'
     });
+});
+
+// Error handler
+app.use((err, req, res, next) => {
+   const {statusCode = 500, message } = err;
+
+   res.status(statusCode);
+   res.json({message,
+   });
 });
 
 module.exports = app;
