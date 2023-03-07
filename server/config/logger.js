@@ -2,7 +2,7 @@
 
 const { createLogger, format, transports } = require('winston');
 const morgan = require('morgan');
-const stripFinalNewline = require('strip-final-newline');
+//const stripFinalNewline = require('strip-final-newline');
 
 // Setup logger
 const logger = createLogger({
@@ -19,12 +19,13 @@ const requests = morgan(requestFormat, {
     stream: {
         write: (message) => {
             // Remove all line breaks
-            const log = stripFinalNewline(message);
+ //           const log = stripFinalNewline(message);
+            const log = message;
             return logger.info(log);
         },
     },
 });
-
+// Add comments
 // Attach to logger object
 logger.requests = requests;
 
